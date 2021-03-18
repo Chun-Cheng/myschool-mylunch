@@ -2,6 +2,7 @@ from flask import Flask, request, redirect, url_for, jsonify  # flash render_tem
 import pymongo
 from bson.objectid import ObjectId
 from datetime import datetime, timedelta
+import requests
 import re
 
 
@@ -17,6 +18,14 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=180)
 @app.route('/')
 def index():
     return 'hi~ This is myschool-mylunch(temporary name)'
+
+
+@app.route('/verify-token')
+def verify_token():
+    token = request.form.get('token')
+    data = {'token' : str(token)}
+    res = requests.post('https://myschool-account.herokuapp.com/token/verify', data = data)
+    return str(res)
 
 
 if __name__ == "__main__":
