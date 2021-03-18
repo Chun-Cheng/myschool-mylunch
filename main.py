@@ -20,7 +20,7 @@ def index():
     return 'hi~ This is myschool-mylunch(temporary name)'
 
 
-@app.route('/verify-token')
+@app.route('/verify-token', methods=['GET','POST'])
 def verify_token():
     token = request.form.get('token')
     data = {'token' : str(token)}
