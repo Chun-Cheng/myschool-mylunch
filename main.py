@@ -25,7 +25,7 @@ def verify_token():
     token = request.form.get('token')
     data = {'token' : str(token)}
     res = requests.post('https://myschool-account.herokuapp.com/token/verify', data = data)
-    return str(res.text)
+    return res.text
 
 
 if __name__ == "__main__":
