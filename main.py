@@ -4,6 +4,7 @@ from bson.objectid import ObjectId
 from datetime import datetime, timedelta
 import requests
 import re
+import json
 
 
 client = pymongo.MongoClient('mongodb+srv://dbUser:o5jzqcHzuKacB2Y1@lunchbox.1pvyu.mongodb.net/lunchbox?retryWrites=true&w=majority')
@@ -23,7 +24,7 @@ def index():
 @app.route('/verify-token', methods=['GET','POST'])
 def verify_token():
     token = request.form.get('token')
-    data = {'token' : str(token)}
+    data = json.dumps({'token' : str(token)})
     res = requests.post('https://myschool-account.herokuapp.com/token/verify', data = data)
     return res.text
 
