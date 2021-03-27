@@ -23,7 +23,7 @@ def index():
 
 @app.route('/verify-token', methods=['GET','POST'])
 def verify_token():
-    token = request.form.get('token')
+    token = request.args.get('token')
     data = json.dumps({'token' : str(token)})
     res = requests.post('https://myschool-account.herokuapp.com/token/verify', data = data)
     return res.text
