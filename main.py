@@ -29,5 +29,8 @@ def verify_token():
     return res.text
 
 
+#app.register_blueprint(api.api)
+#app.register_blueprint(webpage.webpage)
+
 if __name__ == "__main__":
     app.run()
