@@ -17,6 +17,7 @@ def page_test():
             session['token'] = 'None'
             return redirect('https://myschool-account.herokuapp.com/login_request?continue_uri=https://myschool-mylunch.herokuapp.com/login_process?continue_uri=https://myschool-mylunch.herokuapp.com/test&login_require=False')
     except KeyError:
+        session['token'] = 'None'
         return redirect('https://myschool-account.herokuapp.com/login_request?continue_uri=https://myschool-mylunch.herokuapp.com/login_process?continue_uri=https://myschool-mylunch.herokuapp.com/test&login_require=False')
     
     return str(user_data)
