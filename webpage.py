@@ -11,7 +11,7 @@ def page_index():
 def page_test():
     try:
         token = session['token']
-        user_data = function.data_account_get(token=token, cols=['first_name', 'last_name'])
+        user_data = function.request_account_get(token=token, cols=['first_name', 'last_name'])
         if user_data == False:
             session.pop('token',None)
             session['token'] = 'None'
