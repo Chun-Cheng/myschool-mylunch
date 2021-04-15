@@ -1,4 +1,4 @@
-from flask import Blueprint, request, redirect, url_for, render_template
+from flask import Blueprint, request, redirect, url_for, render_template, abort
 import function
 
 webpage = Blueprint('webpage', url_prefix='/lunch', __name__)  # static_folder=None, static_url_path=None, template_folder=None, url_prefix=None, subdomain=None
@@ -7,7 +7,33 @@ webpage = Blueprint('webpage', url_prefix='/lunch', __name__)  # static_folder=N
 def page_index():
     return 'This is myschool-mylunch-webpage'
 
+@webpage.route('/test')
+def page_test():
+    try:
+        token = session['token']
+        user_data = function.data_account_get(token=token, cols=['first_name', 'last_name'])
+        if user_data == False:
+            session.pop('token',None)
+            session['token'] = 'None'
+            return redirect('https://myschool-account.herokuapp.com/login_request?continue_uri=https://myschool-mylunch.herokuapp.com/login_process?continue_uri=https://myschool-mylunch.herokuapp.com/test&login_require=False')
+    except KeyError:
+        return redirect('https://myschool-account.herokuapp.com/login_request?continue_uri=https://myschool-mylunch.herokuapp.com/login_process?continue_uri=https://myschool-mylunch.herokuapp.com/test&login_require=False')
+    
+    return str(user_data)
 
+@webpage.route('/login_process')
+def page_login_process():
+    token = request.args.get('token')
+    continue_uri = request.args.get('continue_uri')
+    res = function.request_token_check(token)
+    if res['result'] == True:
+        session['token'] = token
+        session.permanent = True
+        # continue_uri驗證機制
+        return str(continue_uri) #
+        return redirect(continue_uri)
+    return abort(401)
+        
 #====================================
 @webpage.route('/order' methods=['GET', 'POST'])
 def page_order():
