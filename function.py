@@ -33,7 +33,7 @@ def request_token_check(token):
       res_data['result']
       status_code
     """
-    data = {'token':}
+    data = {'token':token}
     res = requests.post('https://myschool-account.herokuapp.com/api/token_check_request', data=data)
     res_data = json.loads(res.text)
     status_code = res.status_code
