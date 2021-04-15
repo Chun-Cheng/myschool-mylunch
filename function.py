@@ -15,7 +15,7 @@ def request_account_get(token, cols):
       False
     """
     data = json.dumps({'token':str(token), 'cols':cols})
-    res = requests.post('https://myschool-account.herokuapp.com/account_data_request', data=data)
+    res = requests.post('https://myschool-account.herokuapp.com/api/account_data_request', data=data)
     res_data = json.loads(res.text)
     status_code = res.status_code
     if status_code == 200:
@@ -34,7 +34,7 @@ def request_token_check(token):
       status_code
     """
     data = {'token':}
-    res = requests.post('https://myschool-account.herokuapp.com/token_check_request', data=data)
+    res = requests.post('https://myschool-account.herokuapp.com/api/token_check_request', data=data)
     res_data = json.loads(res.text)
     status_code = res.status_code
     if status_code == 200:
