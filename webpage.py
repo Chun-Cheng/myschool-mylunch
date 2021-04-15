@@ -36,7 +36,7 @@ def page_login_process():
     return abort(401)
     
 #====================================
-@webpage.route('/order' methods=['GET', 'POST'])
+@webpage.route('/order', methods=['GET', 'POST'])
 def page_order():
     if request.method == 'POST':
         #取得session_id、預定之日期、訂單種類id及數量、總金額(用於核對)
