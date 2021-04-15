@@ -1,7 +1,7 @@
 from flask import Blueprint, request, redirect, url_for, render_template, abort
 import function
 
-webpage = Blueprint('webpage', __name__, url_prefix='/lunch')  # static_folder=None, static_url_path=None, template_folder=None, url_prefix=None, subdomain=None
+webpage = Blueprint('webpage', __name__)  # url_prefix='/lunch', static_folder=None, static_url_path=None, template_folder=None, url_prefix=None, subdomain=None
 
 @webpage.route('/')
 def page_index():
