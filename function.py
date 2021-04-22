@@ -16,7 +16,8 @@ def request_account_get(token, cols):
     """
     data = json.dumps({'token':str(token), 'cols':cols})
     res = requests.post('https://myschool-account.herokuapp.com/api/account_data_request', data=data)
-    res_data = json.loads(res.text)
+    res_data = res.json()
+    #res_data = json.loads(res.text)
     status_code = res.status_code
     if status_code == 200:
         return res_data
